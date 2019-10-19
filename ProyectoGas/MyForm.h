@@ -1183,7 +1183,7 @@ void Encontrar_numero(int Numero, Lista* Pantalla)
 	AuxPila = new Pila();
 	AuxCola = new Cola();
 	//Valida si el número se encuentra en el top de la pila (caja1)
-	if (Numero == Caja1->Head->Valor)
+	if (Numero == Caja1->Head->Valor && Pantalla->Elementos<4)
 	{
 		Pantalla->Agregar(Caja1->Desapilar());
 	}
@@ -1196,7 +1196,7 @@ void Encontrar_numero(int Numero, Lista* Pantalla)
 			AuxPila->Apilar(Caja1->Desapilar());
 		} while ((Numero != Caja1->Head->Valor) && (Caja1->Head->Siguiente != nullptr));
 		//Valida si el top de la pila (caja1) es el número que se busca y si el siguiente posee un puntero nulo
-		if (Numero == Caja1->Head->Valor && Caja1->Head->Siguiente == nullptr)
+		if (Numero == Caja1->Head->Valor && Caja1->Head->Siguiente == nullptr && Pantalla->Elementos<4)
 		{
 			Pantalla->Agregar(Caja1->Desapilar());
 			do
@@ -1214,7 +1214,7 @@ void Encontrar_numero(int Numero, Lista* Pantalla)
 			} while (AuxPila->Head != nullptr);
 			
 			//Cola (caja2), Valida si el primer elemento de la cola es el número que se busca
-			if (Caja2->Inicio->Valor == Numero)
+			if (Caja2->Inicio->Valor == Numero&& Pantalla->Elementos<4)
 			{
 				Pantalla->Agregar(Caja2->Retirar_Head());
 			}
@@ -1228,7 +1228,7 @@ void Encontrar_numero(int Numero, Lista* Pantalla)
 					AuxCola->Agregar_Cola(Caja2->Retirar_Head());
 				} while ((Numero != Caja2->Inicio->Valor) && (Caja2->Inicio->Siguiente != nullptr));
 				 //Valida si el primer elmento de la cola (caja2) es el número a busca y el puntero siguiente es nulo
-				if (Numero == Caja2->Inicio->Valor && Caja2->Inicio->Siguiente == nullptr)
+				if (Numero == Caja2->Inicio->Valor && Caja2->Inicio->Siguiente == nullptr && Pantalla->Elementos<4)
 				{
 					Pantalla->Agregar(Caja2->Retirar_Head());
 					do
@@ -1254,13 +1254,17 @@ void Encontrar_numero(int Numero, Lista* Pantalla)
 					{
 						Numero++;
 					}
-					//Se llama al metodo, enviando como nuevo parametro de número, el número obtenido más uno
-					Encontrar_numero(Numero, Pantalla);
+					//Se llama al metodo, enviando como nuevo parametro de número, el número obtenido más uno.
+					//Valida que los elementos no sean mayores a 4 elementos dentro de la pila
+					if (Pantalla->Elementos<4)
+					{
+						Encontrar_numero(Numero, Pantalla);
+					}
 
 
 				}
 				//Valida si el número es igual al valor inicio de la cola (caja2)
-				if (Numero == Caja2->Inicio->Valor)
+				if (Numero == Caja2->Inicio->Valor&& Pantalla->Elementos<4)
 				{
 					Pantalla->Agregar(Caja2->Retirar_Head());
 					do
@@ -1272,7 +1276,7 @@ void Encontrar_numero(int Numero, Lista* Pantalla)
 
 		}
 		//Valida si el número es igual al valor top de la pila (caja1)
-		if (Numero == Caja1->Head->Valor)
+		if (Numero == Caja1->Head->Valor && Pantalla->Elementos<4)
 		{
 			Pantalla->Agregar(Caja1->Desapilar());
 			do
